@@ -1,0 +1,55 @@
+services:
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+
+  redisinsight:
+    image: redis/redisinsight:2.70
+    ports:
+      - "5540:5540" # UI exposed here
+    volumes:
+      - redisinsight:/data
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    volumes:
+      - ${PWD}/docker/db:/docker-entrypoint-initdb.d
+
+  producer_service:
+    build:
+      context: ../
+      dockerfile: services/producer/Dockerfile
+    container_name: producer_service
+    depends_on:
+      - redis
+
+  # matchmaking_service:
+  #   build:
+  #     context: ${PWD}/services/matchmaking
+  #     dockerfile: Dockerfile
+  #   container_name: matchmaking_service
+  #   ports:
+  #     - "8080:8080"
+  #     - "8081:8081"
+  #     - "50051:50051"
+  #   volumes:
+  #     - ${PWD}/matchmaking:/app
+  #     - ${PWD}/matchmaking/.air.toml:/app/.air.toml
+  #   depends_on:
+  #     - postgres
+  #   environment:
+  #     - DB_CONN=postgres://postgres:postgres@postgres:5432/postgres?sslmode=disable
+  #   working_dir: /app # Ensure air runs in the correct dir
+  #   command: ["air", "-c", ".air.toml"]
+
+volumes:
+  redisinsight:

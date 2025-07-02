@@ -1,0 +1,10 @@
+[project]
+name = "queue-producer"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = ["redis>=6.2.0"]
+
+[dependency-groups]
+local = ["ipykernel>=6.29.5", "ruff>=0.12.1"]
