@@ -1,0 +1,22 @@
+services:
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+
+  producer_service_test_runner:
+    build:
+      context: ../
+      dockerfile: services/producer/Dockerfile
+      args:
+        INSTALL_DEV_DEPENDENCIES: "true"
+    image: elohell/producer:test
+    container_name: producer_service_test_runner
+    environment:
+      - ENV=docker
+    depends_on:
+      - redis
+    command: python3 -m pytest -vv --cov-report term --cov-report xml:coverage.xml --cov=src --color=yes
+    volumes:
+      - ${PWD}/services/producer/src/:/home/appuser/src
+      - ${PWD}/services/producer/tests/:/home/appuser/tests

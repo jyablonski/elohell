@@ -28,6 +28,7 @@ services:
     build:
       context: ../
       dockerfile: services/producer/Dockerfile
+    image: elohell/producer:local
     container_name: producer_service
     depends_on:
       - redis

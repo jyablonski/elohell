@@ -1,0 +1,110 @@
+# ========================================
+# Python
+# ========================================
+
+# Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+env/
+venv/
+
+# Editor configs
+.vscode/
+.idea/
+
+# Package management
+pip-log.txt
+pip-delete-this-directory.txt
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Test outputs
+htmlcov/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+.tox/
+
+# MyPy, Coverage, Reports
+.mypy_cache/
+.dmypy.json
+coverage.xml
+*.cover
+*.log
+
+# Jupyter notebooks
+.ipynb_checkpoints/
+
+# pyenv
+.python-version
+
+# Local environments
+.env
+.env.*
+*.env
+
+# ========================================
+# Go
+# ========================================
+
+# Build outputs
+/bin/
+/build/
+/out/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Go cache and modules
+*.test
+*.prof
+go.sum
+vendor/
+
+# IDE/tools
+*.swp
+*.swo
+
+# GoLand / JetBrains
+*.iml
+.idea/
+
+# Misc
+.DS_Store
+Thumbs.db
+
+# ========================================
+# Docker (if used)
+# ========================================
+
+*.pid
+docker-compose.override.yml
+docker.env
+
+# ========================================
+# General
+# ========================================
+
+# OS metadata
+.DS_Store
+ehthumbs.db
+Icon?
+Thumbs.db
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# Node (if frontend tools used)
+node_modules/
