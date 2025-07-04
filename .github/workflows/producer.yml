@@ -1,0 +1,21 @@
+name: Producer Test Pipeline
+
+on:
+  pull_request:
+    paths:
+      - "services/producer/**"
+
+env:
+  UV_VERSION: "0.7.18"
+
+jobs:
+  test:
+    name: Test Pipeline
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Tests
+        run: make run-producer-tests

@@ -18,9 +18,9 @@ COPY services/producer/pyproject.toml services/producer/uv.lock ./
 
 RUN pip install uv==0.7.18 && \
     if [ "$INSTALL_DEV_DEPENDENCIES" = "true" ]; then \
-        uv sync --frozen; \
+    uv sync --group test --frozen; \
     else \
-        uv sync --frozen --no-dev; \
+    uv sync --frozen --no-default-groups; \
     fi
 
 FROM base AS runtime
@@ -32,8 +32,6 @@ RUN useradd --create-home appuser
 USER appuser
 WORKDIR /home/appuser
 
-COPY services/producer/main.py ./
+COPY services/producer/src/ ./src/
 
-EXPOSE 8080
-
-CMD ["python3", "-m", "main"]
+CMD ["python3", "-m", "src.main"]
