@@ -13,7 +13,12 @@ WORKDIR /app
 
 COPY go.mod go.sum ./
 RUN go mod download
-COPY . .
+
+COPY .air.toml ./
+
+COPY cmd ./cmd
+COPY internal ./internal
+COPY pkg ./pkg
 
 EXPOSE 8080 50051
 

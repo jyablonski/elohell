@@ -7,9 +7,16 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 DROP TABLE IF EXISTS matches;
 CREATE TABLE IF NOT EXISTS matches (
   id UUID primary key default uuid_generate_v4(),
-  red_team TEXT[],   -- array of player IDs
-  blue_team TEXT[],
   region TEXT,
-  average_skill INT,
+  average_elo INT,
   created_at TIMESTAMP DEFAULT NOW()
+);
+
+DROP TABLE IF EXISTS match_players;
+CREATE TABLE IF NOT EXISTS match_players (
+  match_id UUID REFERENCES source.matches(id) ON DELETE CASCADE,
+  user_id TEXT,
+  team TEXT CHECK (team IN ('red', 'blue')),
+  elo INT,
+  PRIMARY KEY (match_id, user_id)
 );

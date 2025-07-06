@@ -3,9 +3,10 @@ from src.config import QUEUE_NAME
 
 
 def test_write_message(redis_fixture):
-    message = {"user_id": "123"}
+    data = "123"
+    message = {"user_id": data}
     write_redis_message(
         redis_client=redis_fixture, queue_name=QUEUE_NAME, message=message
     )
     result = redis_fixture.lpop(QUEUE_NAME)
-    assert "123" in result
+    assert data in result
