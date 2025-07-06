@@ -1,16 +1,13 @@
-name: Producer Test Pipeline
+name: Producer CI / CD Pipeline
 
 on:
   pull_request:
     paths:
       - "services/producer/**"
 
-env:
-  UV_VERSION: "0.7.18"
-
 jobs:
-  test:
-    name: Test Pipeline
+  producer_test_pipeline:
+    name: Producer Test Pipeline
     runs-on: ubuntu-latest
 
     steps:
